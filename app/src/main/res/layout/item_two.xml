@@ -87,6 +87,7 @@
                     android:text="Piece Rate" />
 
                 <TextView
+                    android:id="@+id/pc_amount_text"
                     style="@style/text_minor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -103,6 +104,7 @@
                     android:background="@color/two" />
 
                 <TextView
+                    android:id="@+id/hr_amount_text"
                     style="@style/text_minor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

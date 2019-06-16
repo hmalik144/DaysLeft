@@ -51,7 +51,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -71,26 +73,28 @@ public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference reference;
     public static List<ShiftObject> shiftObjectArrayList;
+    public static Map<String,ShiftObject> shiftsMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer_main);
 
+        shiftObjectArrayList = new ArrayList<>();
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+        FloatingActionButton fab = findViewById(R.id.fab);
+
         setSupportActionBar(toolbar);
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
-//        reference.addListenerForSingleValueEvent(valueEventListener);
-
         fragmentManager = getSupportFragmentManager();
+        fragmentManager.addOnBackStackChangedListener(backStackChangedListener);
 
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        reference = mDatabase.child(USER_FIREBASE).child(auth.getUid()).child(SHIFT_FIREBASE);
+        reference.addListenerForSingleValueEvent(new CustomValueEventListener(this,fragmentManager,progressBar));
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
-        progressBar.setVisibility(View.GONE);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        fragmentManager.addOnBackStackChangedListener(backStackChangedListener);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -127,9 +129,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container,new FragmentHome()).commit();
-
         setupDrawer();
 
         parseXmlLayout();
@@ -137,28 +136,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
-
-    ValueEventListener valueEventListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-            for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                shiftObjectArrayList.add(postSnapshot.getValue(ShiftObject.class));
-            }
-
-            if (shiftObjectArrayList.size() > 0){
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.container,new FragmentHome()).commit();
-            }else {
-                Toast.makeText(MainActivity.this, "List Empty", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-            Toast.makeText(MainActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
-        }
-    };
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

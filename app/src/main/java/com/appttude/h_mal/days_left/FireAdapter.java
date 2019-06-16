@@ -3,6 +3,7 @@ package com.appttude.h_mal.days_left;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import com.appttude.h_mal.days_left.Objects.ShiftObject;
 import com.appttude.h_mal.days_left.Objects.TaskObject;
 import com.appttude.h_mal.days_left.Objects.TimeObject;
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
@@ -22,7 +24,7 @@ class FireAdapter extends FirebaseListAdapter<ShiftObject> {
 
     String TAG = "FireAdapter";
 
-    Query ref;
+    List<ShiftObject> shiftObjects;
 
     /**
      * @param activity    The activity containing the ListView
@@ -36,8 +38,7 @@ class FireAdapter extends FirebaseListAdapter<ShiftObject> {
      */
     public FireAdapter(Activity activity, Class<ShiftObject> modelClass, int modelLayout, Query ref) {
         super(activity, modelClass, modelLayout, ref);
-        this.ref = ref;
-
+        shiftObjects = new ArrayList<>();
     }
 
     @Override
@@ -96,6 +97,14 @@ class FireAdapter extends FirebaseListAdapter<ShiftObject> {
     public String getId(int i){
         return getRef(i).getKey();
     }
+
+    @Override
+    protected ShiftObject parseSnapshot(DataSnapshot snapshot) {
+        shiftObjects.add(snapshot.getValue(ShiftObject.class));
+        return super.parseSnapshot(snapshot);
+    }
+
+
 
     private String getBreakTimeString(int breakMins){
         float hoursFloat = breakMins/60;

@@ -90,8 +90,6 @@ public class FragmentTools extends Fragment {
         shiftObjectArrayList = new ArrayList<>();
 
         mFunctions = FirebaseFunctions.getInstance();
-
-
     }
 
     @Override

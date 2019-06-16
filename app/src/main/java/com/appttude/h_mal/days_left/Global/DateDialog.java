@@ -114,10 +114,9 @@ public class DateDialog extends DatePickerDialog {
             mMonth = month + 1;
             mDay = dayOfMonth;
 
-            editText.setText(String.format("%02d", mDay) + "/" +
-                    String.format("%02d", (mMonth)) +"/" +
-                    mYear
-            );
+            String date = mYear + "-" + String.format("%02d", mMonth) + "-" + String.format("%02d", mDay);
+
+            editText.setText(date);
 
         }
     };

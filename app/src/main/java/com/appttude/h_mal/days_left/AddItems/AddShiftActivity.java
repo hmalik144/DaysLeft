@@ -152,7 +152,6 @@ public class AddShiftActivity extends AppCompatActivity {
         if (ShiftID != null){
             DatabaseReference reference = mDatabase.child(USER_FIREBASE).child(auth.getUid()).child(SHIFT_FIREBASE).child(ShiftID);
 
-
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

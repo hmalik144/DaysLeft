@@ -110,6 +110,8 @@ public class FragmentList extends Fragment {
         final String[] grpname = {"Name","Date Added","Date of shift"};
         int checkedItem = -1;
 
+
+
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(getContext());
         alt_bld.setTitle("Sort by:");
         alt_bld.setSingleChoiceItems(grpname, checkedItem, new DialogInterface
@@ -117,13 +119,19 @@ public class FragmentList extends Fragment {
             public void onClick(DialogInterface dialog, final int item) {
                 switch (item){
                     case 0:
-                        adapter = new FireAdapter(getActivity(), ShiftObject.class, R.layout.list_item, reference.orderByChild("abnObject/companyName"));
+                        Query q1 = reference.orderByChild("abnObject/companyName")
+                                .equalTo("GREEN CLOUD NURSERY");
+
+                        q1.orderByChild("shiftDate")
+                                .equalTo("2019-04-12");
+
+                        adapter = new FireAdapter(getActivity(), ShiftObject.class, R.layout.list_item, q1);
                         break;
                     case 1:
-                        adapter = new FireAdapter(getActivity(), ShiftObject.class, R.layout.list_item, reference.orderByChild("shiftDate"));
+                        adapter = new FireAdapter(getActivity(), ShiftObject.class, R.layout.list_item, reference.orderByChild("dateTimeAdded"));
                         break;
                     case 2:
-                        adapter = new FireAdapter(getActivity(), ShiftObject.class, R.layout.list_item, reference.orderByChild("dateTimeAdded"));
+                        adapter = new FireAdapter(getActivity(), ShiftObject.class, R.layout.list_item, reference.orderByChild("shiftDate"));
                         break;
                     default:
 

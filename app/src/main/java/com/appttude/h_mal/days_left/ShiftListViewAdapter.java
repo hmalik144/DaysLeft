@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.appttude.h_mal.days_left.Objects.ShiftObject;
@@ -107,5 +109,38 @@ public class ShiftListViewAdapter extends ArrayAdapter<ShiftObject> {
         }
 
         return s;
+    }
+
+    private class ValueFilter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+
+//            if (constraint != null && constraint.length() > 0) {
+//                ArrayList<ShiftObject> filterList = new ArrayList<>();
+//                for (int i = 0; i < mStringFilterList.size(); i++) {
+//                    if ((mStringFilterList.get(i).getBabyname().toUpperCase())
+//                            .contains(constraint.toString().toUpperCase())) {
+//                        BabyDetailsData babydata = new BabyDetailsData(mStringFilterList.get(i)
+//                                .getBabyname(), mStringFilterList.get(i)
+//                                .getBabypicture());
+//                        filterList.add(babydata);
+//                    }
+//                }
+//                results.count = filterList.size();
+//                results.values = filterList;
+//            } else {
+//                results.count = mStringFilterList.size();
+//                results.values = mStringFilterList;
+//            }
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint,
+                                      FilterResults results) {
+//            babylist = (ArrayList<BabyDetailsData>) results.values;
+            notifyDataSetChanged();
+        }
     }
 }
