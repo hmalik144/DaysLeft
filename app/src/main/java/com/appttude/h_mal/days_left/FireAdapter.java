@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class FireAdapter extends FirebaseListAdapter<ShiftObject> {
+class FireAdapter extends FirebaseListAdapter<ShiftObject>{
 
     String TAG = "FireAdapter";
 
@@ -98,12 +100,13 @@ class FireAdapter extends FirebaseListAdapter<ShiftObject> {
         return getRef(i).getKey();
     }
 
+
+
     @Override
     protected ShiftObject parseSnapshot(DataSnapshot snapshot) {
         shiftObjects.add(snapshot.getValue(ShiftObject.class));
         return super.parseSnapshot(snapshot);
     }
-
 
 
     private String getBreakTimeString(int breakMins){
@@ -123,5 +126,6 @@ class FireAdapter extends FirebaseListAdapter<ShiftObject> {
 
         return s;
     }
+
 
 }

@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         reference = mDatabase.child(USER_FIREBASE).child(auth.getUid()).child(SHIFT_FIREBASE);
-        reference.addListenerForSingleValueEvent(new CustomValueEventListener(this,fragmentManager,progressBar));
+        reference.addValueEventListener(new CustomValueEventListener(this,fragmentManager,progressBar));
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,22 +175,6 @@ public class MainActivity extends AppCompatActivity {
                 case "InsuranceFragment":
                     title = "Insurance";
                     break;
-                case "logbookFragment":
-                    title = "Logbook";
-                    break;
-                case "MotFragment":
-                    title = "M.O.T";
-                    break;
-                case "PrivateHireLicenseFragment":
-                    title = "Private Hire License";
-                    break;
-                case "VehicleSetupFragment":
-                    title = "Vehicle Profile";
-                    break;
-                case "UserMainFragment":
-                    return;
-                case "ArchiveFragment":
-                    return;
                 default:
                     title = getResources().getString(R.string.app_name);
             }

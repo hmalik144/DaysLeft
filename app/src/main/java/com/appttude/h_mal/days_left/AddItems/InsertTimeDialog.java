@@ -1,28 +1,17 @@
 package com.appttude.h_mal.days_left.AddItems;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.appttude.h_mal.days_left.Objects.TimeObject;
 import com.appttude.h_mal.days_left.R;
-
-import java.util.Calendar;
-
-import static com.appttude.h_mal.days_left.MainActivity.Epoch2DateString;
-import static com.appttude.h_mal.days_left.MainActivity.Epoch2DateTimes;
 
 public class InsertTimeDialog{
 
@@ -75,8 +64,8 @@ public class InsertTimeDialog{
         public AlertDialog.Builder setView(View view) {
             view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_search_employer, null);
 
-            startTimeTextView = view.findViewById(R.id.start_time);
-            finishTimeTextView = view.findViewById(R.id.finish_time);
+            startTimeTextView = view.findViewById(R.id.from_date);
+            finishTimeTextView = view.findViewById(R.id.to_date);
             timePickerTimePicker = view.findViewById(R.id.time_picker);
 //            breakEditText = view.findViewById(R.id.breaktime);
 

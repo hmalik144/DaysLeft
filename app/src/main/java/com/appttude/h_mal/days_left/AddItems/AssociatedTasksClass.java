@@ -52,18 +52,21 @@ public class AssociatedTasksClass implements ValueEventListener {
             DialogListAdapter dialogListAdapter = new DialogListAdapter(activity,taskObjects);
             listView.setAdapter(dialogListAdapter);
 
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity();
-                }
-            });
+
 
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             builder.setView(dialogView);
 
             final AlertDialog alertDialog = builder.create();
             alertDialog.show();
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity();
+                    alertDialog.dismiss();
+                }
+            });
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

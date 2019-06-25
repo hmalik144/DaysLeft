@@ -111,7 +111,7 @@ public class ShiftListViewAdapter extends ArrayAdapter<ShiftObject> {
         return s;
     }
 
-    private class ValueFilter extends Filter {
+    public class fireFilter extends Filter{
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -119,28 +119,25 @@ public class ShiftListViewAdapter extends ArrayAdapter<ShiftObject> {
 
 //            if (constraint != null && constraint.length() > 0) {
 //                ArrayList<ShiftObject> filterList = new ArrayList<>();
-//                for (int i = 0; i < mStringFilterList.size(); i++) {
-//                    if ((mStringFilterList.get(i).getBabyname().toUpperCase())
-//                            .contains(constraint.toString().toUpperCase())) {
-//                        BabyDetailsData babydata = new BabyDetailsData(mStringFilterList.get(i)
-//                                .getBabyname(), mStringFilterList.get(i)
-//                                .getBabypicture());
-//                        filterList.add(babydata);
+//
+//                for (ShiftObject shiftObject : shiftObjects){
+//                    if (shiftObject.getAbnObject().getCompanyName().toUpperCase().contains(constraint.toString().toUpperCase())){
+//                        filterList.add(shiftObject);
 //                    }
 //                }
 //                results.count = filterList.size();
 //                results.values = filterList;
+//
 //            } else {
-//                results.count = mStringFilterList.size();
-//                results.values = mStringFilterList;
+//                results.count = shiftObjects.size();
+//                results.values = shiftObjects;
 //            }
             return results;
         }
+
         @Override
-        protected void publishResults(CharSequence constraint,
-                                      FilterResults results) {
-//            babylist = (ArrayList<BabyDetailsData>) results.values;
-            notifyDataSetChanged();
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+
         }
     }
 }

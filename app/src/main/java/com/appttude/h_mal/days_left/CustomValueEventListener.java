@@ -41,9 +41,14 @@ public class CustomValueEventListener implements ValueEventListener {
             shiftsMap.put(postSnapshot.getKey(),postSnapshot.getValue(ShiftObject.class));
         }
 
+//        shiftObjectArrayList.stream().filter()
+
         if (shiftObjectArrayList.size() > 0){
+            if (fragmentManager.getFragments().size() == 0){
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container,new FragmentHome()).commit();
+            }
+
         }else {
             Toast.makeText(context, "List Empty", Toast.LENGTH_SHORT).show();
         }

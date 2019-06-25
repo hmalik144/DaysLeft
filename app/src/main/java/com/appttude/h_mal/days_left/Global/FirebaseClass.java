@@ -49,28 +49,21 @@ public class FirebaseClass {
     public static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     public static FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    Context context;
-    Uri filePath;
-
     public interface Response {
         void retrieveAbnStringList(List<String> abnList);
         void retrieveAbnObjectList(List<AbnObject> abnObjects);
         void retrieveTaskList(List<TaskObject> taskObjects);
     }
 
-    public Response delegate;
+    public interface matchListener{
+        void abnMatch(Boolean confirm);
+    }
 
     public interface Complete{
         void taskCompleted(Boolean success);
     }
 
     public FirebaseClass() {
-    }
-
-    public FirebaseClass(Context context, Uri filePath, Response delegate) {
-        this.context = context;
-        this.filePath = filePath;
-        this.delegate = delegate;
     }
 
 //    public void uploadImage(String path, String name) {
@@ -355,7 +348,7 @@ public class FirebaseClass {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                delegate.retrieveAbnStringList(abnList);
+                delegate.retrieveAbnStringList(null);
             }
         });
     }
@@ -379,6 +372,28 @@ public class FirebaseClass {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 delegate.retrieveAbnObjectList(null);
+            }
+        });
+    }
+
+    public void newAbnEntry(final String currentAbn, final matchListener delegate){
+        DatabaseReference listRef = mDatabase.child(USER_FIREBASE).child(auth.getUid()).child("recent" + EMPLOYER_FIREBASE);
+        listRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot current : dataSnapshot.getChildren()){
+                        if (current.getKey().equals(currentAbn)){
+                            delegate.abnMatch(true);
+                            return;
+                        }
+
+                }
+                delegate.abnMatch(false);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                delegate.abnMatch(false);
             }
         });
     }

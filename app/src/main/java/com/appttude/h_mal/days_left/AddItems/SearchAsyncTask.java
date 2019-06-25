@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 
 import com.appttude.h_mal.days_left.Abn.AbnListAdapter;
 import com.appttude.h_mal.days_left.Abn.AbnObject;
+import com.appttude.h_mal.days_left.Global.FirebaseClass;
 
 import java.io.IOException;
 import java.net.URL;
@@ -109,10 +110,19 @@ public class SearchAsyncTask extends AsyncTask<URL,Void,String>{
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         AbnObject currentAbnObject = abnObjectArrayList.get(position);
 
-                        Intent returnIntent = new Intent();
+                        final Intent returnIntent = new Intent();
                         returnIntent.putExtra("AbnObject",currentAbnObject);
-                        activity.setResult(Activity.RESULT_OK,returnIntent);
-                        activity.finish();
+                        new FirebaseClass().newAbnEntry(currentAbnObject.getAbn(), new FirebaseClass.matchListener() {
+                            @Override
+                            public void abnMatch(Boolean confirm) {
+                                if (!confirm){
+                                    //push to server
+                                }else {
+                                    activity.setResult(Activity.RESULT_OK,returnIntent);
+                                    activity.finish();
+                                }
+                            }
+                        });
                     }
                 });
             }else if (abnObjectArrayList == null){

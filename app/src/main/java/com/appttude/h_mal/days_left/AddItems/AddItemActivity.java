@@ -50,7 +50,7 @@ public class AddItemActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.container,addTaskFragment).addToBackStack("Task").commit();
         }
 
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+        ProgressBar progressBar = findViewById(R.id.progressBar2);
         progressBar.setVisibility(View.GONE);
 
         fragmentManager.addOnBackStackChangedListener(backStackChangedListener);

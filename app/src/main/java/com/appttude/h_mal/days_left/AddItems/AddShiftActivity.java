@@ -2,43 +2,28 @@ package com.appttude.h_mal.days_left.AddItems;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.media.tv.TvContract;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.appttude.h_mal.days_left.Abn.AbnListAdapter;
 import com.appttude.h_mal.days_left.Abn.AbnObject;
 import com.appttude.h_mal.days_left.Global.DateDialog;
 import com.appttude.h_mal.days_left.Global.FirebaseClass;
@@ -51,17 +36,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 import static com.appttude.h_mal.days_left.Global.FirebaseClass.EMPLOYER_FIREBASE;
 import static com.appttude.h_mal.days_left.Global.FirebaseClass.PIECE;
@@ -72,7 +49,6 @@ import static com.appttude.h_mal.days_left.Global.FirebaseClass.USER_FIREBASE;
 import static com.appttude.h_mal.days_left.Global.FirebaseClass.auth;
 import static com.appttude.h_mal.days_left.Global.FirebaseClass.getDateTimeString;
 import static com.appttude.h_mal.days_left.Global.FirebaseClass.mDatabase;
-import static com.appttude.h_mal.days_left.MainActivity.Epoch2DateTimes;
 
 
 public class AddShiftActivity extends AppCompatActivity {
@@ -469,8 +445,8 @@ public class AddShiftActivity extends AppCompatActivity {
 
             currentTag = "start";
 
-            startTimeTextView = view.findViewById(R.id.start_time);
-            finishTimeTextView = view.findViewById(R.id.finish_time);
+            startTimeTextView = view.findViewById(R.id.from_date);
+            finishTimeTextView = view.findViewById(R.id.to_date);
             timePickerTimePicker = view.findViewById(R.id.time_picker);
             breakEditText = view.findViewById(R.id.breaktime);
             TextView okText = view.findViewById(R.id.ok);
@@ -539,8 +515,6 @@ public class AddShiftActivity extends AppCompatActivity {
                     timeString = timeObject.getTimeOut();
                     toggleTextButtons(false);
                 }
-
-
 
                 if (timeString != null){
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
