@@ -332,6 +332,14 @@ public class AddShiftActivity extends AppCompatActivity {
             if(resultCode == Activity.RESULT_OK){
                 abnObject = data.getParcelableExtra("AbnObject");
                 setEmployerCard();
+                
+                TaskObject taskObjectRel = data.getParcelableExtra("TaskObject"); 
+				
+				if(taskObjectRel != null){
+					taskObject = taskObjectRel;
+					
+					setTaskCard();
+				}
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
