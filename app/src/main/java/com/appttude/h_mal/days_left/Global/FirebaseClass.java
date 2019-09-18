@@ -153,28 +153,28 @@ public class FirebaseClass {
                                     if (retrievedAbn != null){
                                         abnObject.setCompanyName(retrievedAbn.getCompanyName());
                                     }
-                                    pushRef.child(abnObject.getAbn()).setValue(abnObject)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()){
-                                                    PushTaskObject(abnObject.getAbn(), taskObject, new Complete() {
-                                                        @Override
-                                                        public void taskCompleted(Boolean success) {
-                                                            if (success){
-                                                                activity.finish();
-                                                            }else {
-                                                                progressBar.setVisibility(View.GONE);
-                                                                Toast.makeText(activity, "Could not upload Task", Toast.LENGTH_SHORT).show();
-                                                            }
-                                                        }
-                                                    });
-                                                }else {
-                                                    Log.i(TAG, "onComplete: " + task.getResult());
-
-                                                }
-                                            }
-                                        });
+//                                    pushRef.child(abnObject.getAbn()).setValue(abnObject)
+//                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                            @Override
+//                                            public void onComplete(@NonNull Task<Void> task) {
+//                                                if (task.isSuccessful()){
+//                                                    PushTaskObject(abnObject.getAbn(), taskObject, new Complete() {
+//                                                        @Override
+//                                                        public void taskCompleted(Boolean success) {
+//                                                            if (success){
+//                                                                activity.finish();
+//                                                            }else {
+//                                                                progressBar.setVisibility(View.GONE);
+//                                                                Toast.makeText(activity, "Could not upload Task", Toast.LENGTH_SHORT).show();
+//                                                            }
+//                                                        }
+//                                                    });
+//                                                }else {
+//                                                    Log.i(TAG, "onComplete: " + task.getResult());
+//
+//                                                }
+//                                            }
+//                                        });
                                 }
 
                             }

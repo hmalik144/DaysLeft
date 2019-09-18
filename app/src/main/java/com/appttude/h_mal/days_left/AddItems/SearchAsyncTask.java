@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.appttude.h_mal.days_left.Abn.AbnListAdapter;
 import com.appttude.h_mal.days_left.Abn.AbnObject;
@@ -27,6 +28,7 @@ import static com.appttude.h_mal.days_left.Abn.SearchAbnRecords.makeHttpRequest;
 public class SearchAsyncTask extends AsyncTask<URL,Void,String>{
 
     private Activity activity;
+
     private ListView listView;
     private LinearLayout linearLayout;
     private ProgressBar progressBar;
@@ -110,6 +112,8 @@ public class SearchAsyncTask extends AsyncTask<URL,Void,String>{
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         AbnObject currentAbnObject = abnObjectArrayList.get(position);
 
+                        Toast.makeText(activity, "AHHHHHHH", Toast.LENGTH_SHORT).show();
+
                         final Intent returnIntent = new Intent();
                         returnIntent.putExtra("AbnObject",currentAbnObject);
                         new FirebaseClass().newAbnEntry(currentAbnObject.getAbn(), new FirebaseClass.matchListener() {
@@ -117,6 +121,8 @@ public class SearchAsyncTask extends AsyncTask<URL,Void,String>{
                             public void abnMatch(Boolean confirm) {
                                 if (!confirm){
                                     //push to server
+                                    activity.setResult(Activity.RESULT_OK,returnIntent);
+                                    activity.finish();
                                 }else {
                                     activity.setResult(Activity.RESULT_OK,returnIntent);
                                     activity.finish();
