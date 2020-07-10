@@ -24,7 +24,7 @@
         android:orientation="vertical"
         android:layout_centerInParent="true"
         android:id="@+id/centre_view">
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/select_employer_card"
             style="@style/cardview_theme"
             android:layout_width="match_parent"
@@ -86,9 +86,9 @@
                 android:paddingBottom="12dp"
                 android:text="Select Employer"
                 android:textSize="18sp" />
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/select_task_card"
             style="@style/cardview_theme"
             android:layout_width="match_parent"
@@ -149,9 +149,9 @@
                 android:paddingBottom="12dp"
                 android:text="Select Task"
                 android:textSize="18sp" />
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/select_times_card"
             style="@style/cardview_theme"
             android:layout_width="match_parent"
@@ -241,7 +241,7 @@
                 android:text="insert times"
                 android:textSize="18sp"
                 android:visibility="visible" />
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <EditText
             android:id="@+id/units"

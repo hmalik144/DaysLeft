@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.appttude.h_mal.days_left.FragmentList">
+    tools:context="com.appttude.h_mal.days_left.ui.main.list.FragmentList">
 
     <ListView
         android:id="@+id/page_two_list"
