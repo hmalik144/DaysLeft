@@ -2,7 +2,7 @@ package com.appttude.h_mal.days_left.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.appttude.h_mal.days_left.FirebaseDatabase
+import com.appttude.h_mal.days_left.data.repository.UserRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

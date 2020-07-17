@@ -2,38 +2,55 @@ package com.appttude.h_mal.days_left.ui.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import com.appttude.h_mal.days_left.R
-import com.appttude.h_mal.days_left.FirebaseClass.Companion.auth
-import com.google.firebase.auth.FirebaseAuth
+import com.appttude.h_mal.days_left.ui.splashScreen.SplashFragment
+import com.appttude.h_mal.days_left.utils.hide
+import com.appttude.h_mal.days_left.utils.show
+import com.appttude.h_mal.days_left.utils.showToast
+import kotlinx.android.synthetic.main.activity_fullscreen.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class FullscreenActivity : AppCompatActivity() {
-    companion object {
-        lateinit var fragmentManagerLogin : FragmentManager
-    }
+class FullscreenActivity : AppCompatActivity(), KodeinAware {
+    override val kodein by kodein()
+    private val factory by instance<AuthViewModelFactory>()
+    private val viewModel: AuthViewModel by viewModels { factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fullscreen)
 
-        auth = FirebaseAuth.getInstance()
+        viewModel.operationState.observe(this, Observer {
+            if (it){
+                progress_circular.show()
+            }else{
+                progress_circular.hide()
+            }
+        })
 
-        fragmentManagerLogin = supportFragmentManager
-
-        fragmentManagerLogin.beginTransaction().replace(
-            R.id.container,
-            SplashFragment()
-        ).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            .commit()
+        viewModel.operationResult.observe(this, Observer {
+            it.getContentIfNotHandled()?.let { message ->
+                showToast(message)
+            }
+        })
     }
 
+    // If the there is more than 1 fragment in the backstack
+    // Go back to previous fragment
+    // Or exit
     override fun onBackPressed() {
-        super.onBackPressed()
-        if (fragmentManagerLogin.fragments.size > 1) {
-            fragmentManagerLogin.popBackStack()
+        container.childFragmentManager.backStackEntryCount.let {
+            if (it > 0) {
+                super.onBackPressed()
+            } else {
+                finish()
+            }
         }
     }
-
 
 }

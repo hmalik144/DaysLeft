@@ -9,6 +9,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.appttude.h_mal.days_left.*
 import com.appttude.h_mal.days_left.ui.login.FullscreenActivity
 import com.appttude.h_mal.days_left.FirebaseClass.Companion.SHIFT_FIREBASE
@@ -26,11 +28,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
+import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
 class MainActivity : AppCompatActivity(), KodeinAware {
     override val kodein by kodein()
     private val factory by instance<MainViewModelFactory>()
+    private val factory2 by instance<ShiftsViewModelFactory>()
     val viewModel: MainViewModel by viewModels{ factory }
 
     companion object{
@@ -41,6 +45,8 @@ class MainActivity : AppCompatActivity(), KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drawer_main)
+
+        ViewModelProvider(this, factory2).get(ShiftsViewModel::class.java)
 
         //setup backstack change listener
         supportFragmentManager.addOnBackStackChangedListener(backStackChangedListener)

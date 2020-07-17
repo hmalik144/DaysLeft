@@ -1,9 +1,10 @@
 package com.appttude.h_mal.days_left.application
 
 import android.app.Application
-import com.appttude.h_mal.days_left.FirebaseDatabase
-import com.appttude.h_mal.days_left.ui.login.FirebaseAuthSource
-import com.appttude.h_mal.days_left.ui.login.UserRepository
+import com.appttude.h_mal.days_left.ui.login.AuthViewModelFactory
+import com.appttude.h_mal.days_left.data.firebase.FirebaseAuthSource
+import com.appttude.h_mal.days_left.data.firebase.FirebaseDataSource
+import com.appttude.h_mal.days_left.data.repository.UserRepository
 import com.appttude.h_mal.days_left.ui.main.MainViewModelFactory
 import com.appttude.h_mal.days_left.ui.main.ShiftsViewModelFactory
 import org.kodein.di.Kodein
@@ -20,17 +21,18 @@ class AppClass : Application(), KodeinAware{
         import(androidXModule(this@AppClass))
 
         bind() from singleton { FirebaseAuthSource() }
-        bind() from singleton { FirebaseDatabase() }
-        bind() from singleton { UserRepository(instance()) }
-        bind() from provider {
-            MainViewModelFactory(
+        bind() from singleton { FirebaseDataSource() }
+        bind() from singleton {
+            UserRepository(
                 instance()
             )
         }
+        bind() from provider { MainViewModelFactory( instance() ) }
         bind() from provider {
-            ShiftsViewModelFactory(
-                instance()
-            )
+            ShiftsViewModelFactory( instance() )
+        }
+        bind() from provider {
+            AuthViewModelFactory( instance() )
         }
     }
 }

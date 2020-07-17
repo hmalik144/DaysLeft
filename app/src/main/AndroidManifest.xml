@@ -16,18 +16,22 @@
         android:supportsRtl="true"
         android:name=".application.AppClass"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".AddItemActivity"></activity>
-        <activity
-            android:name="com.appttude.h_mal.days_left.ui.login.FullscreenActivity"
+        <activity android:name=".ui.splashScreen.SplashFragment"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.appttude.h_mal.days_left.ui.login.FullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"/>
+
+        <activity android:name=".AddItemActivity"/>
+
         <activity android:name=".ChangeUserDetailsActivity" />
         <activity android:name=".AddShiftActivity" />
         <activity

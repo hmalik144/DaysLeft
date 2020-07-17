@@ -1,4 +1,4 @@
-package com.appttude.h_mal.days_left.firebaseLiveData
+package com.appttude.h_mal.days_left.firebaseUtils
 
 import android.util.Log
 import androidx.lifecycle.LiveData

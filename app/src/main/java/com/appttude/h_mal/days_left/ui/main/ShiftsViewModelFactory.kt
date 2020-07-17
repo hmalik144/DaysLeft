@@ -2,14 +2,14 @@ package com.appttude.h_mal.days_left.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.appttude.h_mal.days_left.FirebaseDatabase
+import com.appttude.h_mal.days_left.data.firebase.FirebaseDataSource
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.
  * Required given LoginViewModel has a non-empty constructor
  */
 class ShiftsViewModelFactory(
-    private val firebaseDatabase: FirebaseDatabase
+    private val firebaseDatabase: FirebaseDataSource
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

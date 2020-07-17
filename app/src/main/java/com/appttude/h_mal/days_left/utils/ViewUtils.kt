@@ -11,6 +11,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
@@ -35,18 +37,18 @@ fun Context.hideKeyboard(view: View?) {
     inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
 }
 
-//fun View.navigateTo(navigationId: Int) {
-//    try {
-//        Navigation.findNavController(this).navigate(navigationId)
-//    }catch (e: IllegalArgumentException){
-//        e.printStackTrace()
-//    }
-//
-//}
-//
-//fun View.navigateTo(navDirections: NavDirections) {
-//    Navigation.findNavController(this).navigate(navDirections)
-//}
+fun View.navigateTo(navigationId: Int) {
+    try {
+        Navigation.findNavController(this).navigate(navigationId)
+    }catch (e: IllegalArgumentException){
+        e.printStackTrace()
+    }
+
+}
+
+fun View.navigateTo(navDirections: NavDirections) {
+    Navigation.findNavController(this).navigate(navDirections)
+}
 
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {

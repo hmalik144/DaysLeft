@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Days_Left</string>
+    <string name="app_name">Days Left</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">List</string>
     <string name="title_notifications">Tools</string>
@@ -16,7 +16,7 @@
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -39,6 +39,20 @@
     <string name="empty_line_one">List is Empty</string>
     <string name="empty_line_two">Search for an Employer</string>
     <string name="submit">Submit</string>
+    <string name="welcome_title">Welcome to Days Left</string>
+    <string name="welcome_subtitle">Use days left to track your rural work progress, track your work done and compile data needed for visa applications.</string>
+    <string name="register">Regiseter</string>
+    <string name="login">Login</string>
+    <string name="login_title">Login</string>
+    <string name="login_subtitle">Login to your account with your email address and password.</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_password_subtitle">Enter your email address and receive a reset password email.</string>
+    <string name="action_submit">Submit</string>
+    <string name="prompt_nickname">Enter a nickname</string>
+    <string name="next">Next</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must contain 8–16 characters, including at least 1 upper case letter and at least 1 numerical digit.</string>
+    <string name="password_reset_success">Password reset successful</string>
 
     <string-array name="work_type">
         <item>Select work type…</item>
