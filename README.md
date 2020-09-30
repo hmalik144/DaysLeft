@@ -34,8 +34,7 @@ Includes the progress so far through your 88 days. Piece rate totals, hourly pai
 
 ### Splash screen
 
-<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
-<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
+<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600"><img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
 ### Splash screen
 
 <img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
