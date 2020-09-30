@@ -8,6 +8,10 @@ apply plugin: 'com.google.gms.google-services'
 // Android navigation
 apply plugin: 'androidx.navigation.safeargs'
 
+apply plugin: 'com.google.firebase.crashlytics'
+repositories {
+    mavenCentral()
+}
 
 android {
     compileSdkVersion 29
@@ -55,24 +59,39 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.exifinterface:exifinterface:1.2.0'
     implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+
+    // Android navigation
+    def nav_version = "2.3.0"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    // Feature module Support
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+    implementation 'androidx.preference:preference:1.1.1'
 
     // Testing
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Crashlytics
+    implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
+
     // Gson
-    implementation 'com.google.code.gson:gson:2.3.1'
+    implementation 'com.google.code.gson:gson:2.8.5'
     // Google Play Services
-    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
     // Firebase
-    implementation 'com.google.firebase:firebase-core:16.0.1'
-    implementation 'com.google.firebase:firebase-auth:16.2.1'
-    implementation 'com.google.firebase:firebase-storage:16.0.1'
-    implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.google.firebase:firebase-core:17.4.4'
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-database:19.3.1'
     implementation 'com.firebaseui:firebase-ui-database:1.1.1'
-    implementation 'com.google.firebase:firebase-functions:16.2.0'
+    implementation 'com.google.firebase:firebase-functions:19.0.2'
+    implementation 'com.google.firebase:firebase-firestore-ktx:21.6.0'
+    /* coroutines support for firebase operations */
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
+
     //Picasso - load images
     implementation 'com.squareup.picasso:picasso:2.71828'
     // Zoomable Image view
@@ -84,9 +103,4 @@ dependencies {
     // Excel (legacy)
     implementation "com.github.SUPERCILEX.poi-android:poi:3.17"
 
-}
-
-apply plugin: 'com.google.gms.google-services'
-repositories {
-    mavenCentral()
 }

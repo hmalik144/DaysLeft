@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,17 +11,23 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="6dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginRight="6dp"
         android:layout_marginBottom="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:cardCornerRadius="@dimen/card_radius">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="6dp"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/header_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -30,72 +37,80 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:alpha="0.45"
+                    android:layout_gravity="center"
                     android:src="@drawable/clock_icon"
                     app:layout_constraintDimensionRatio="1:1" />
 
                 <TextView
                     android:id="@+id/card_title"
-                    style="@style/title_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="6dp"
-                    android:gravity="center_vertical"
                     android:includeFontPadding="false"
                     android:textColor="@color/three"
-                    tools:text="Hourly" />
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:singleLine="true"
+                    android:maxLines="2"
+                    android:textAppearance="?android:attr/textAppearanceSearchResultTitle"
+                    android:gravity="center_vertical"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:layout_width="wrap_content"
+                    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                    android:layout_height="wrap_content"
+                    tools:text="Title"/>
 
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/text_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="horizontal">
+                style="@style/container_main">
 
-                <TextView
-                    style="@style/text_major"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left|center"
-                    android:text="Total : " />
+                <TextView android:id="@+id/title_one_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
+                    android:ellipsize="marquee"
+                    android:text="Total"/>
 
-                <TextView
-                    android:id="@+id/units"
-                    style="@style/text_minor"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:text="296 Hours" />
+                <TextView android:id="@+id/units"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:autoLink="web"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="296 Hours"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/text_holder_two"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                style="@style/container_main">
 
-                <TextView
-                    style="@style/text_major"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left|center"
-                    android:text="Earned : " />
+                <TextView android:id="@+id/title_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
+                    android:ellipsize="marquee"
+                    android:text="Earned"/>
 
-                <TextView
-                    android:id="@+id/total_earned"
-                    style="@style/text_minor"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:text="$965.37" />
+                <TextView android:id="@+id/total_earned"
+                    android:layout_alignLeft="@android:id/title"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:autoLink="web"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="$965.37"/>
             </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
-</FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

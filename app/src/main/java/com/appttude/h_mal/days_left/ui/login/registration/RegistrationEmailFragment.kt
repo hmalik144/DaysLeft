@@ -1,16 +1,14 @@
 package com.appttude.h_mal.days_left.ui.login.registration
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.fragment.app.Fragment
 import com.appttude.h_mal.days_left.R
-import com.appttude.h_mal.days_left.models.registration.RegistrationArgs
 import com.appttude.h_mal.days_left.utils.afterTextChanged
 import com.appttude.h_mal.days_left.utils.isEmailValid
-import com.appttude.h_mal.days_left.utils.isNameValid
 import com.appttude.h_mal.days_left.utils.navigateTo
 import kotlinx.android.synthetic.main.fragment_registration_two.*
 

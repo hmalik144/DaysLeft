@@ -1,175 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginBottom="6dp"
-        app:cardCornerRadius="@dimen/card_radius">
-
-        <LinearLayout
+        android:elevation="0dp"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="@dimen/card_radius"
+        tools:cardBackgroundColor="#BDBDBD" >
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp"
-            android:orientation="vertical">
-
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
             <LinearLayout
+                android:id="@+id/container_one"
+                style="@style/container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/farm_name"
-                        style="@style/title_card"
+                        android:id="@+id/item_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
                         android:textColor="@color/one"
-                        android:textSize="22sp"
+                        android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
                         tools:text="W and L Farm" />
 
                     <TextView
                         android:id="@+id/task_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="left|center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autoLink="web"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/two"
-                        android:textSize="20sp"
                         tools:text="Packing Tomatoes" />
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/date"
-                    style="@style/text_major"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="top|right"
+                    android:textColor="@color/two"
+                    android:alpha="0.7"
+                    android:textSize="12sp"
                     tools:text="19/04/2018" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/container_two"
+                style="@style/container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/container_one">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:alpha="0.45"
+                    style="@style/container_icon"
                     android:src="@drawable/task" />
 
                 <TextView
                     android:id="@+id/type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="2dp"
-                    android:gravity="center_vertical"
-                    android:textSize="18sp"
+                    style="@style/container_subtext"
                     tools:text="Hourly - $23/Hour" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/container_three"
+                style="@style/container"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/time_holder">
+                android:elevation="3dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/container_two"
+                app:layout_constraintWidth_percent="0.5">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:alpha="0.45"
+                    style="@style/container_icon"
                     android:src="@drawable/clock_icon" />
 
                 <TextView
                     android:id="@+id/time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="2dp"
-                    android:gravity="center_vertical"
-                    android:textSize="18sp"
-                    tools:text="10:00 - 18:00" />
-
-                <LinearLayout
-                    android:id="@+id/break_holder"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:alpha="0.45"
-                        android:src="@drawable/break_time" />
-
-                    <TextView
-                        android:id="@+id/break_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="2dp"
-                        android:gravity="center_vertical"
-                        android:textSize="18sp"
-                        tools:text="1 h 30 m" />
-                </LinearLayout>
+                    style="@style/container_subtext"
+                    tools:text="Hourly - $23/Hour" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/container_four"
+                style="@style/container"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/units_holder">
+                android:elevation="3dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/container_two"
+                app:layout_constraintWidth_percent="0.5">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:alpha="0.45"
+                    style="@style/container_icon"
+                    android:src="@drawable/break_time" />
+
+                <TextView
+                    android:id="@+id/break_time"
+                    style="@style/container_subtext"
+                    tools:text="1 h 30 m" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/container_five"
+                style="@style/container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/container_three">
+
+                <ImageView
+                    style="@style/container_icon"
                     android:src="@drawable/box_icon" />
 
                 <TextView
                     android:id="@+id/units"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="2dp"
-                    android:gravity="center_vertical"
-                    android:textSize="18sp"
+                    style="@style/container_subtext"
                     tools:text="6 h 30 m" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/container_six"
+                style="@style/container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/container_five">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:alpha="0.45"
+                    style="@style/container_icon"
                     android:src="@drawable/marker" />
 
                 <TextView
                     android:id="@+id/location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="2dp"
-                    android:gravity="center_vertical"
-                    android:textSize="18sp"
+                    style="@style/container_subtext"
                     tools:text="Bundaberg" />
             </LinearLayout>
 
-        </LinearLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
 
 </FrameLayout>

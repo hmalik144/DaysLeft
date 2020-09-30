@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.appttude.h_mal.days_left.ui.main.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home"/>
+    <fragment
+        android:id="@+id/navigation_list"
+        android:name="com.appttude.h_mal.days_left.ui.main.list.FragmentList"
+        android:label="Shifts"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/list_to_shiftOverviewFragment"
+            app:destination="@id/shiftOverviewFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit"/>
+        <action
+            android:id="@+id/list_to_addShiftActivity"
+            app:destination="@id/addNewShiftActivity"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit"/>
+        <action
+            android:id="@+id/action_navigation_list_to_addShiftActivity"
+            app:destination="@id/addShiftActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_tools"
+        android:name="com.appttude.h_mal.days_left.ui.main.tools.FragmentTools"
+        android:label="Tools"
+        tools:layout="@layout/fragment_tools" >
+        <action
+            android:id="@+id/action_navigation_tools_to_addShiftActivity"
+            app:destination="@id/addNewShiftActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.appttude.h_mal.days_left.ui.settings.SettingsFragment"
+        android:label="Settings">
+        <action
+            android:id="@+id/to_changeEmailFragment"
+            app:destination="@id/changeEmailFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit"/>
+        <action
+            android:id="@+id/to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit"/>
+        <action
+            android:id="@+id/to_changeNameFragment"
+            app:destination="@id/changeNameFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit"/>
+        <action
+            android:id="@+id/mainTo_loginHomeFragment"
+            app:destination="@id/backToLogin"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit"/>
+    </fragment>
+    <fragment
+        android:id="@+id/changeEmailFragment"
+        android:name="com.appttude.h_mal.days_left.ui.settings.ChangeEmailFragment"
+        android:label="Change Email"
+        tools:layout="@layout/fragment_change_email"/>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.appttude.h_mal.days_left.ui.settings.ChangePasswordFragment"
+        android:label="Change Password"
+        tools:layout="@layout/fragment_change_password"/>
+    <fragment
+        android:id="@+id/changeNameFragment"
+        android:name="com.appttude.h_mal.days_left.ui.settings.ChangeNameFragment"
+        android:label="Change Name"
+        tools:layout="@layout/fragment_change_name"/>
+    <activity
+        android:id="@+id/backToLogin"
+        android:name="com.appttude.h_mal.days_left.ui.login.FullscreenActivity"
+        android:label="Home"
+        tools:layout="@layout/activity_fullscreen"/>
+    <fragment
+        android:id="@+id/shiftOverviewFragment"
+        android:name="com.appttude.h_mal.days_left.ui.main.list.ShiftOverviewFragment"
+        android:label="Shift Overview"
+        tools:layout="@layout/fragment_shift_overview" >
+        <argument
+            android:name="id"
+            app:argType="string"/>
+        <action
+            android:id="@+id/shiftOverview_to_addShiftActivity"
+            app:destination="@id/addNewShiftActivity"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit"/>
+    </fragment>
+    <activity
+        android:id="@+id/addNewShiftActivity"
+        android:name="com.appttude.h_mal.days_left.ui.addShift.AddNewShiftActivity"
+        android:label="AddNewShiftActivity" >
+        <argument
+            android:name="shiftId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+    </activity>
+    <activity
+        android:id="@+id/addShiftActivity"
+        android:name="com.appttude.h_mal.days_left.ui.addShift.AddShiftActivity"
+        android:label="AddShiftActivity" />
+    <!--    <activity-->
+<!--        android:id="@+id/addShiftActivity"-->
+<!--        android:name="com.appttude.h_mal.days_left.ui.addShift.AddNewShiftActivity"-->
+<!--        android:label="AddShiftActivity" >-->
+<!--        <argument-->
+<!--            android:name="shiftId"-->
+<!--            app:argType="string"-->
+<!--            app:nullable="true"-->
+<!--            android:defaultValue="@null"/>-->
+<!--    </activity>-->
+
+</navigation>

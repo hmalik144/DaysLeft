@@ -1,10 +1,9 @@
 package com.appttude.h_mal.days_left.data.firebase
 
 import com.google.android.gms.tasks.Task
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.HttpsCallableResult
-import java.util.HashMap
+import java.util.*
 
 class FirebaseFunctionsSource {
 

@@ -7,23 +7,25 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import com.appttude.h_mal.days_left.BuildConfig
 import com.appttude.h_mal.days_left.R
+import com.appttude.h_mal.days_left.utils.navigateTo
+import com.appttude.h_mal.days_left.utils.safeFirebaseResult
+import com.appttude.h_mal.days_left.utils.showToast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.FirebaseFunctions
-import com.google.firebase.functions.FirebaseFunctionsException
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_tools.*
 import java.io.File
-import java.util.HashMap
+import java.util.*
 
 class FragmentTools : Fragment() {
 
@@ -43,15 +45,14 @@ class FragmentTools : Fragment() {
         return inflater.inflate(R.layout.fragment_tools, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         compile.setOnClickListener(onClickListener)
-
         summary_button.setOnClickListener(onClickListener)
     }
 
-    internal val onClickListener = View.OnClickListener { view ->
+    private val onClickListener = View.OnClickListener { view ->
         requestPermissions().let {
             if (it) {
                 if (view.id == R.id.compile){
@@ -64,44 +65,33 @@ class FragmentTools : Fragment() {
 
     }
 
-    internal val complete = OnCompleteListener<String>{task ->
-        if (!task.isSuccessful) {
-            val e = task.exception
-            if (e is FirebaseFunctionsException) {
-                val ffe = e as FirebaseFunctionsException?
-                val code = ffe!!.code
-                val details = ffe.details
-            }
-
-            Log.w(TAG, "addMessage:onFailure", e)
-            Toast.makeText(context, "An error occurred.", Toast.LENGTH_SHORT).show()
-
-        }else{
-            // [START_EXCLUDE]
-            val result = task.result as String
-            Log.i(TAG, "onComplete: $result")
-
-            val strings = result.split("/").toTypedArray()
-
-            val fbstore = storage.reference.child(result)
-
+    private val complete = OnCompleteListener<String>{ task ->
+        task.safeFirebaseResult({
             val savePath = Environment.getExternalStorageDirectory().toString() + "/DaysLeftTemp"
             val file = File(savePath)
             if (!file.exists()) {
                 file.mkdirs()
             }
-
+            it ?: return@safeFirebaseResult
+            val fbstore = storage.reference.child(it)
+            val strings = it.split("/").toTypedArray()
             val myFile = File(savePath, strings.last())
 
-            fbstore.getFile(myFile).addOnSuccessListener {
+            fbstore.getFile(myFile).safeFirebaseResult({
                 // Local temp file has been created
                 val data =
-                    FileProvider.getUriForFile(context!!, BuildConfig.APPLICATION_ID + ".provider", myFile)
+                    FileProvider.getUriForFile(
+                        requireContext(),
+                        BuildConfig.APPLICATION_ID + ".provider",
+                        myFile
+                    )
+
                 activity?.grantUriPermission(
-                    activity?.getPackageName(),
+                    activity?.packageName,
                     data,
                     Intent.FLAG_GRANT_READ_URI_PERMISSION
                 )
+
                 val intent1 = Intent(Intent.ACTION_VIEW)
                     .setDataAndType(data, "application/vnd.ms-excel")
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
@@ -109,16 +99,72 @@ class FragmentTools : Fragment() {
                 try {
                     activity?.startActivity(intent1)
                 } catch (e: ActivityNotFoundException) {
-                    Toast.makeText(activity, "No Application Available to View Excel", Toast.LENGTH_SHORT)
-                        .show()
+                    context?.showToast("No Application Available to View Excel")
                 }
+            },{
 
+            },{
 
-            }.addOnFailureListener {
-                // Handle any errors
+            })
+        },{
+            context?.showToast(it)
+        },{
+        })
 
-            }
-        }
+//        if (!task.isSuccessful) {
+//
+//
+//            val e = task.exception
+//            if (e is FirebaseFunctionsException) {
+//                val ffe = e as FirebaseFunctionsException?
+//                val code = ffe!!.code
+//                val details = ffe.details
+//            }
+//
+//            Log.w(TAG, "addMessage:onFailure", e)
+//            Toast.makeText(context, "An error occurred.", Toast.LENGTH_SHORT).show()
+//
+//        }else{
+//            // [START_EXCLUDE]
+//
+//            val result = task.result as String
+//            Log.i(TAG, "onComplete: $result")
+//
+//            val strings = result.split("/").toTypedArray()
+//
+//            val fbstore = storage.reference.child(result)
+//
+//            val savePath = Environment.getExternalStorageDirectory().toString() + "/DaysLeftTemp"
+//            val file = File(savePath)
+//            if (!file.exists()) {
+//                file.mkdirs()
+//            }
+//
+//            val myFile = File(savePath, strings.last())
+//
+//            fbstore.getFile(myFile).addOnSuccessListener {
+//                // Local temp file has been created
+//                val data =
+//                    FileProvider.getUriForFile(requireContext(), BuildConfig.APPLICATION_ID + ".provider", myFile)
+//                activity?.grantUriPermission(
+//                    activity?.getPackageName(),
+//                    data,
+//                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                )
+//                val intent1 = Intent(Intent.ACTION_VIEW)
+//                    .setDataAndType(data, "application/vnd.ms-excel")
+//                    .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+//
+//                try {
+//                    activity?.startActivity(intent1)
+//                } catch (e: ActivityNotFoundException) {
+//                    Toast.makeText(activity, "No Application Available to View Excel", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//
+//
+//            }
+//        }
     }
 
     fun writeToExcel(): Task<String> {
@@ -164,7 +210,7 @@ class FragmentTools : Fragment() {
     }
 
     fun requestPermissions() : Boolean{
-        if (checkSelfPermission(context!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(context,"not granted",Toast.LENGTH_SHORT).show()
 

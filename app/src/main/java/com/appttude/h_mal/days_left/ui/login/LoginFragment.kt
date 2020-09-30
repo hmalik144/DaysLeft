@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.appttude.h_mal.days_left.R
 import com.appttude.h_mal.days_left.utils.afterTextChanged
@@ -14,13 +14,12 @@ import com.appttude.h_mal.days_left.utils.navigateTo
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
 
 
 class LoginFragment : Fragment(), KodeinAware {
     override val kodein by kodein()
-    private val factory by instance<AuthViewModelFactory>()
-    private val viewModel: AuthViewModel by viewModels { factory }
+
+    private val viewModel: AuthViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +52,13 @@ class LoginFragment : Fragment(), KodeinAware {
             afterTextChanged {
                 til_submission.error = null
             }
+        }
+
+        submission_button.setOnClickListener {
+            viewModel.login(
+                submission_et.text.toString(),
+                password.text.toString()
+            )
         }
 
         viewModel.loginFormState.observe(viewLifecycleOwner, Observer {

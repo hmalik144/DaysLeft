@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Enter Your Password" />
+        android:text="Enter Your Password Again" />
 
     <TextView
         android:id="@+id/submission_subtitle_tv"

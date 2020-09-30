@@ -9,4 +9,10 @@
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="CircleView">
+        <attr name="circle_thickness" format="integer" />
+        <attr name="circle_arc" format="integer"/>
+        <attr name="arc_colour" format="color"/>
+    </declare-styleable>
+
 </resources>

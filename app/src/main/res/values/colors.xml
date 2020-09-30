@@ -11,4 +11,6 @@
     <color name="five">#c1272d</color>
 
     <color name="black_overlay">#66000000</color>
+    <color name="colorInvalid">#D5D5D5</color>
+    <color name="dimGrey">#F0F0F0</color>
 </resources>

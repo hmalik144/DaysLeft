@@ -1,6 +1,5 @@
 package com.appttude.h_mal.days_left.utils
 
-import android.text.TextUtils
 import java.util.regex.Pattern
 
 // Password must contain 8-16 characters,
@@ -13,9 +12,12 @@ fun isPasswordValid(password: String?): Boolean {
 }
 
 fun isNameValid(name: String?): Boolean {
-    return name?.let {
-        Pattern.compile("[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}\$").matcher(it).find()
-    } ?: false
+    return !name.isNullOrBlank()
+
+//    return name?.let {
+////        [a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$
+//        Pattern.compile("[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}\$").matcher(it).find()
+//    } ?: false
 }
 
 fun isEmailValid(email: String?): Boolean {

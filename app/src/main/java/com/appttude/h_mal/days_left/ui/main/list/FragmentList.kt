@@ -1,36 +1,29 @@
 package com.appttude.h_mal.days_left.ui.main.list
 
 import android.app.AlertDialog
-import android.content.DialogInterface
-import android.content.DialogInterface.BUTTON_POSITIVE
 import android.content.Intent
-import android.database.DataSetObserver
 import android.os.Bundle
 import android.view.*
-import android.widget.AdapterView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
-import com.appttude.h_mal.days_left.*
-import com.appttude.h_mal.days_left.CustomDialog.Companion.dateSelectionFrom
-import com.appttude.h_mal.days_left.CustomDialog.Companion.dateSelectionTo
-import com.appttude.h_mal.days_left.FirebaseClass.Companion.SHIFT_ID
-import com.appttude.h_mal.days_left.models.AbnObject
-import com.appttude.h_mal.days_left.models.ShiftObject
-import com.appttude.h_mal.days_left.ui.main.MainActivity
-import com.appttude.h_mal.days_left.ui.main.MainActivity.Companion.ref
+import androidx.navigation.fragment.findNavController
+import com.appttude.h_mal.days_left.R
+import com.appttude.h_mal.days_left.ui.addShift.AddNewShiftActivity
+import com.appttude.h_mal.days_left.ui.addShift.AddShiftActivity
+import com.appttude.h_mal.days_left.ui.addShift.AddShiftFragment
+import com.appttude.h_mal.days_left.ui.login.FullscreenActivity
 import com.appttude.h_mal.days_left.ui.main.ShiftsViewModel
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.google.firebase.FirebaseOptions
-import com.google.firebase.database.Query
-import kotlinx.android.synthetic.main.dialog_previous_abns_used.view.*
+import com.appttude.h_mal.days_left.ui.main.list.ShiftListRecyclerAdapter.Sortation
+import com.appttude.h_mal.days_left.ui.splashScreen.SplashFragment
+import com.appttude.h_mal.days_left.utils.navigateTo
+import com.appttude.h_mal.days_left.utils.showToast
 import kotlinx.android.synthetic.main.fragment_list.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 
-class FragmentList : androidx.fragment.app.Fragment() {
+class FragmentList : androidx.fragment.app.Fragment(), SearchView.OnQueryTextListener {
     val viewModel: ShiftsViewModel by activityViewModels()
 
-    lateinit var fireAdapter: FireAdapter
+    lateinit var fireAdapter: ShiftListRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,37 +36,30 @@ class FragmentList : androidx.fragment.app.Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //set custom firebase adapter on listview
 
+        add_test.setOnClickListener {
+            view.navigateTo(R.id.list_to_addShiftActivity)
+        }
 
-        fireAdapter = FireAdapter(
-            activity,
-            ShiftObject::class.java,
-            R.layout.list_item,
-            viewModel.shifts
-        )
+        fireAdapter =
+            ShiftListRecyclerAdapter(
+                view,
+                viewModel
+            )
 
-        page_two_list.apply {
+        recycler_view.apply {
             adapter = fireAdapter
-
-            onItemClickListener =
-                AdapterView.OnItemClickListener { _, _, position, _ ->
-                    val refId = fireAdapter.getId(position)
-                    val intent = Intent(activity, AddShiftActivity::class.java)
-                    intent.putExtra(SHIFT_ID, refId)
-                    startActivity(intent)
-                }
-
-            onItemLongClickListener =
-                AdapterView.OnItemLongClickListener { _, _, position, _ ->
-                    AlertDialog.Builder(context).apply {
-                        setTitle("Are you sure you want to delete?")
-                        setNegativeButton(android.R.string.no, null)
-                        setPositiveButton(android.R.string.yes) { _, _ ->
-                            fireAdapter.getRef(position).removeValue()
-                        }
-                        create().show()
-                    }
-                    true
-                }
+//            onItemLongClickListener =
+//                AdapterView.OnItemLongClickListener { _, _, position, _ ->
+//                    AlertDialog.Builder(context).apply {
+//                        setTitle("Are you sure you want to delete?")
+//                        setNegativeButton(android.R.string.no, null)
+//                        setPositiveButton(android.R.string.yes) { _, _ ->
+//                            fireAdapter.getRef(position).removeValue()
+//                        }
+//                        create().show()
+//                    }
+//                    true
+//                }
         }
         setHasOptionsMenu(true)
     }
@@ -81,14 +67,14 @@ class FragmentList : androidx.fragment.app.Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_list_fragment, menu)
+
+        val menuItem = menu.findItem(R.id.app_bar_filter)
+        val searchView = menuItem.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.app_bar_filter -> {
-                filterData()
-                return false
-            }
             R.id.app_bar_soft -> {
                 sortData()
                 return false
@@ -106,31 +92,15 @@ class FragmentList : androidx.fragment.app.Fragment() {
             setSingleChoiceItems(groupName, checkedItem) { dialog, item ->
                 when (item) {
                     0 -> {
-                        val q1 =
-
-                        viewModel.shifts.orderByChild("abnObject/companyName").equalTo("GREEN CLOUD NURSERY")
-                        fireAdapter.notifyDataSetChanged()
-//                        fireAdapter = FireAdapter(
-//                            activity,
-//                            ShiftObject::class.java,
-//                            R.layout.list_item,
-//                            q1
-//                        )
+                        fireAdapter.filterShifts(Sortation.Name())
                     }
-                    1 -> fireAdapter = FireAdapter(
-                        activity,
-                        ShiftObject::class.java,
-                        R.layout.list_item,
-                        ref.orderByChild("dateTimeAdded")
-                    )
-                    2 -> fireAdapter = FireAdapter(
-                        activity,
-                        ShiftObject::class.java,
-                        R.layout.list_item,
-                        ref.orderByChild("shiftDate")
-                    )
+                    1 -> {
+                        fireAdapter.filterShifts(Sortation.DateAdded())
+                    }
+                    2 ->{
+                        fireAdapter.filterShifts(Sortation.ShiftDate())
+                    }
                 }
-                page_two_list.adapter = fireAdapter
                 dialog.dismiss()
             }
             create().show()
@@ -138,116 +108,130 @@ class FragmentList : androidx.fragment.app.Fragment() {
 
     }
 
-    private fun filterData() {
-        val groupName = arrayOf("Name", "Date Added", "Shift Type")
-        val checkedItem = -1
+    override fun onQueryTextSubmit(query: String?): Boolean {
 
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle("Filter by:")
-        builder.setSingleChoiceItems(
-            groupName,
-            checkedItem,
-            DialogInterface.OnClickListener { dialog, item ->
-                dialog.dismiss()
-
-                when (item) {
-                    0 -> {
-                        val dialogBuilder = AlertDialog.Builder(context)
-                        dialogBuilder.setTitle("Select Employer:")
-                        //get layout
-                        val dialogView = View.inflate(
-                            context,
-                            R.layout.dialog_previous_abns_used, null
-                        )
-                        //hide button
-                        dialogView.button_list_dialog.visibility = View.GONE
-                        //get listview
-                        val listView = dialogView.list_item_list_dialog
-                        //get unique abn objects
-                        val uniqueAbnObjects = turnToUniqueAbnObject(MainActivity.shiftList)
-                        //populate list in view
-                        listView.adapter =
-                            AbnListAdapter(
-                                requireContext(),
-                                uniqueAbnObjects as MutableList<AbnObject>
-                            )
-                        //on item click listener
-                        listView.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
-                            applyFilter(uniqueAbnObjects[position].abn!!, null)
-                        })
-                        //set view on dialog
-                        dialogBuilder.setView(dialogView)
-
-                        dialogBuilder.create().show()
-
-                    }
-                    1 -> {
-                        val customDialog =
-                            CustomDialog(requireContext())
-
-                        customDialog.setButton(BUTTON_POSITIVE,
-                            getContext()?.getString(android.R.string.yes),
-                            DialogInterface.OnClickListener { dialogNew, which ->
-                                //interface results back
-                                if (dateSelectionFrom != dateSelectionTo) {
-                                    applyFilter(dateSelectionFrom, dateSelectionTo)
-                                }
-
-                                customDialog.dismiss()
-                            })
-
-                        customDialog.create()
-                    }
-                    2 -> {
-                        val typeDialog = AlertDialog.Builder(context)
-                        val typeString = arrayOf("Hourly", "Piece Rate")
-
-                        typeDialog.setSingleChoiceItems(
-                            arrayOf("Hourly", "Piece Rate"), -1
-                        ) { dialog, which ->
-                            val q1 =
-                                ref.orderByChild("taskObject/workType").equalTo(typeString[which])
-
-                            fireAdapter = FireAdapter(
-                                activity,
-                                ShiftObject::class.java,
-                                R.layout.list_item,
-                                q1
-                            )
-                            page_two_list.adapter = fireAdapter
-                        }
-                        typeDialog.create().show()
-                    }
-                }
-            })
+        return true
     }
 
-    fun turnToUniqueAbnObject(shifts: ArrayList<ShiftObject>): List<AbnObject> {
-        val abnList = mutableListOf<AbnObject>()
-
-        shifts.forEach { shiftObject ->
-            shiftObject.abnObject?.let { abnList.add(it) }
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if (newText.isNullOrBlank()){
+            fireAdapter.filterList(null)
+        }else{
+            fireAdapter.filterList(newText)
         }
-
-        return abnList.distinct()
+        return false
     }
 
-    fun applyFilter(arg1: String, arg2: String?) {
-        val q1: Query
-        if (arg2 == null) {
-            q1 = ref.orderByChild("abnObject/abn").equalTo(arg1)
-        } else {
-            q1 = ref.orderByChild("shiftDate").startAt(arg1).endAt(arg2)
-        }
-
-        fireAdapter = FireAdapter(
-            activity,
-            ShiftObject::class.java,
-            R.layout.list_item,
-            q1
-        )
-        page_two_list.adapter = fireAdapter
-    }
+//    private fun filterData() {
+//        val groupName = arrayOf("Name", "Date Added", "Shift Type")
+//        val checkedItem = -1
+//
+//        val builder = AlertDialog.Builder(context)
+//        builder.setTitle("Filter by:")
+//        builder.setSingleChoiceItems(
+//            groupName,
+//            checkedItem,
+//            DialogInterface.OnClickListener { dialog, item ->
+//                dialog.dismiss()
+//
+//                when (item) {
+//                    0 -> {
+//                        val dialogBuilder = AlertDialog.Builder(context)
+//                        dialogBuilder.setTitle("Select Employer:")
+//                        //get layout
+//                        val dialogView = View.inflate(
+//                            context,
+//                            R.layout.dialog_previous_abns_used, null
+//                        )
+//                        //hide button
+//                        dialogView.button_list_dialog.visibility = View.GONE
+//                        //get listview
+//                        val listView = dialogView.list_item_list_dialog
+//                        //get unique abn objects
+//                        val uniqueAbnObjects = viewModel.shifts
+//                        //populate list in view
+//                        listView.adapter =
+//                            AbnListAdapter(
+//                                requireContext(),
+//                                uniqueAbnObjects
+//                            )
+//                        //on item click listener
+//                        listView.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
+//                            applyFilter(uniqueAbnObjects[position].abn!!, null)
+//                        })
+//                        //set view on dialog
+//                        dialogBuilder.setView(dialogView)
+//
+//                        dialogBuilder.create().show()
+//
+//                    }
+//                    1 -> {
+//                        val customDialog =
+//                            CustomDialog(requireContext())
+//
+//                        customDialog.setButton(BUTTON_POSITIVE,
+//                            getContext()?.getString(android.R.string.yes),
+//                            DialogInterface.OnClickListener { dialogNew, which ->
+//                                //interface results back
+//                                if (dateSelectionFrom != dateSelectionTo) {
+//                                    applyFilter(dateSelectionFrom, dateSelectionTo)
+//                                }
+//
+//                                customDialog.dismiss()
+//                            })
+//
+//                        customDialog.create()
+//                    }
+//                    2 -> {
+//                        val typeDialog = AlertDialog.Builder(context)
+//                        val typeString = arrayOf("Hourly", "Piece Rate")
+//
+//                        typeDialog.setSingleChoiceItems(
+//                            arrayOf("Hourly", "Piece Rate"), -1
+//                        ) { dialog, which ->
+//                            val q1 =
+//                                ref.orderByChild("taskObject/workType").equalTo(typeString[which])
+//
+//                            fireAdapter = FireAdapter(
+//                                activity,
+//                                ShiftObject::class.java,
+//                                R.layout.list_item,
+//                                q1
+//                            )
+//                            page_two_list.adapter = fireAdapter
+//                        }
+//                        typeDialog.create().show()
+//                    }
+//                }
+//            })
+//    }
+//
+//    fun turnToUniqueAbnObject(shifts: ArrayList<ShiftObject>): List<AbnObject> {
+//        val abnList = mutableListOf<AbnObject>()
+//
+//        shifts.forEach { shiftObject ->
+//            shiftObject.abnObject?.let { abnList.add(it) }
+//        }
+//
+//        return abnList.distinct()
+//    }
+//
+//    fun applyFilter(arg1: String, arg2: String?) {
+//        val q1: Query
+//        if (arg2 == null) {
+//            q1 = ref.orderByChild("abnObject/abn").equalTo(arg1)
+//        } else {
+//            q1 = ref.orderByChild("shiftDate").startAt(arg1).endAt(arg2)
+//        }
+//
+//        fireAdapter = FireAdapter(
+//            activity,
+//            ShiftObject::class.java,
+//            R.layout.list_item,
+//            q1
+//        )
+//        page_two_list.adapter = fireAdapter
+//    }
 
 
 }

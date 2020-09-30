@@ -1,13 +1,10 @@
 package com.appttude.h_mal.days_left.ui.login
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.appttude.h_mal.days_left.R
-import com.appttude.h_mal.days_left.ui.splashScreen.SplashFragment
 import com.appttude.h_mal.days_left.utils.hide
 import com.appttude.h_mal.days_left.utils.show
 import com.appttude.h_mal.days_left.utils.showToast
@@ -33,7 +30,7 @@ class FullscreenActivity : AppCompatActivity(), KodeinAware {
             }
         })
 
-        viewModel.operationResult.observe(this, Observer {
+        viewModel.operationError.observe(this, Observer {
             it.getContentIfNotHandled()?.let { message ->
                 showToast(message)
             }

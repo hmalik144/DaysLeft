@@ -1,11 +1,11 @@
 package com.appttude.h_mal.days_left.ui.login.registration
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.fragment.app.Fragment
 import com.appttude.h_mal.days_left.R
 import com.appttude.h_mal.days_left.models.registration.RegistrationArgs
 import com.appttude.h_mal.days_left.utils.afterTextChanged
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_nickname.*
 
 /**
  * A simple [Fragment] subclass.
- * Use the [RegistrationNicknameFragment.newInstance] factory method to
+ * Use the [RegistrationNicknameFragment] factory method to
  * create an instance of this fragment.
  */
 class RegistrationNicknameFragment : Fragment() {
@@ -38,7 +38,7 @@ class RegistrationNicknameFragment : Fragment() {
                 til_submission.error = null
             }
 
-            setOnEditorActionListener { textView, id, _ ->
+            setOnEditorActionListener { _, id, _ ->
                 if (id == EditorInfo.IME_ACTION_DONE) {
                     next()
                     return@setOnEditorActionListener true

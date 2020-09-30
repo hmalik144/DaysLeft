@@ -2,14 +2,14 @@ package com.appttude.h_mal.days_left.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.appttude.h_mal.days_left.data.repository.UserRepository
+import com.appttude.h_mal.days_left.data.repository.FirebaseRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.
  * Required given LoginViewModel has a non-empty constructor
  */
 class AuthViewModelFactory(
-    private val userRepository: UserRepository
+    private val firebaseRepository: FirebaseRepository
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
@@ -17,7 +17,7 @@ class AuthViewModelFactory(
         if (modelClass.isAssignableFrom(AuthViewModel::class.java)) {
             return (
                     AuthViewModel(
-                        userRepository
+                        firebaseRepository
                     )
             ) as T
         }

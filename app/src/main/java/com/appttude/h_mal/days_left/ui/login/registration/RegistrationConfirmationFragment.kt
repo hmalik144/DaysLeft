@@ -1,23 +1,18 @@
 package com.appttude.h_mal.days_left.ui.login.registration
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.appttude.h_mal.days_left.R
 import com.appttude.h_mal.days_left.ui.login.AuthViewModel
 import com.appttude.h_mal.days_left.utils.afterTextChanged
-import com.appttude.h_mal.days_left.utils.isEmailValid
 import com.appttude.h_mal.days_left.utils.navigateTo
 import kotlinx.android.synthetic.main.fragment_registration_four.*
-import kotlinx.android.synthetic.main.fragment_registration_four.submission_button
-import kotlinx.android.synthetic.main.fragment_registration_four.submission_et
-import kotlinx.android.synthetic.main.fragment_registration_four.til_submission
-import kotlinx.android.synthetic.main.fragment_registration_two.*
 
 
 /**
