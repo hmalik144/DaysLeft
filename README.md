@@ -32,23 +32,18 @@ Includes the progress so far through your 88 days. Piece rate totals, hourly pai
 
 # Sample Screenshots
 
-### Splash screen
+### Splash screen, Login & Home
 
-<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600"><img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
-### Splash screen
+<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600"> <img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151805_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600"> <img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151854_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
 
-<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
+### Shift list & Shift overview
 
-### Splash screen
+<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151900_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600"> <img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151953_com.appttude.h_mal.days_left.jpg?raw=true" alt="alt text" width="300" height="600">
 
-<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
+### Compiled Excel Results
 
-### Splash screen
+<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_152339_com.google.android.apps.docs.editors.sheets.jpg" alt="alt text" width="600" height="300">
 
-<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
-### Splash screen
-
-<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
 # Issues
 
 ## Download compilations 
