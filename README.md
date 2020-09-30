@@ -32,7 +32,7 @@ Includes the progress so far through your 88 days. Piece rate totals, hourly pai
 
 # Sample Screenshots
 
-
+![image](https://photos.app.goo.gl/UJ1o7konnUfciHgQ7)
 
 # Issues
 
