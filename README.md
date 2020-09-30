@@ -5,7 +5,8 @@ A shift tracker for rural work carried out by backpackers.
 # Overview
 
 Working holider makers in australia are given the option to carry out 3 months of rural work in exchange for a second year working holiday visa. The problem with working holiday makers carrying out rural work many are subjected to exploitation and abude. 
-Here is an article in The Guardian outlining the horrible conditions
+Here is an article in The Guardian outlining the horrible conditions.
+
 <a href='https://www.theguardian.com/australia-news/2018/may/21/death-in-the-sun-australias-88-day-law-leaves-backpackers-exploited-and-exposed'><img src='https://github.com/hmalik144/DaysLeft/blob/master/img/88_days_article.PNG' width="480" height="270"/></a>
 
 This is part of the problem within rural work, but one of many issues is exploitation on pay. I created this application to tackle the problem.
