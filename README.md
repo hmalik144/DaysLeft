@@ -34,6 +34,9 @@ Includes the progress so far through your 88 days. Piece rate totals, hourly pai
 
 ![image](https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg)
 
+..asdsad
+<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="400" height="800">
+
 # Issues
 
 ## Download compilations 
