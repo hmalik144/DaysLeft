@@ -48,13 +48,13 @@ Includes the progress so far through your 88 days. Piece rate totals, hourly pai
 
 # Issues
 
-## Download compilations 
+### Download compilations 
 Currently the android security settings prevent downloading files from the web without predefined security parameters.
 
-## Sortation and filter
+### Sortation and filter
 A few teething issues with filtering and sorting list
 
-## Architectural Pattern
+### Architectural Pattern
 
 MVVM - Model View ViewModel
 SOLID coding
