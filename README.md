@@ -32,11 +32,24 @@ Includes the progress so far through your 88 days. Piece rate totals, hourly pai
 
 # Sample Screenshots
 
-![image](https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg)
+### Splash screen
 
-..asdsad
-<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="400" height="800">
+<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
+<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
+### Splash screen
 
+<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
+
+### Splash screen
+
+<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
+
+### Splash screen
+
+<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
+### Splash screen
+
+<img src="https://github.com/hmalik144/DaysLeft/blob/master/img/Screenshot_20200930_151759_com.appttude.h_mal.days_left.jpg" alt="alt text" width="300" height="600">
 # Issues
 
 ## Download compilations 
